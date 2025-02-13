@@ -1,4 +1,5 @@
 import ThemeSwitcher from "./components/ThemeSwitcher";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -76,10 +77,13 @@ export default function Home() {
                 Includes authentication, billing, user management, and more.
               </p>
               <div className="flex gap-4 justify-center items-center flex-col sm:flex-row animate-fade-in-up">
-                <button className="btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-all duration-300 text-primary-content rounded-full group relative overflow-hidden">
+                <Link 
+                  href="/login"
+                  className="btn btn-primary btn-lg shadow-lg hover:shadow-xl transition-all duration-300 text-primary-content rounded-full group relative overflow-hidden"
+                >
                   <span className="relative z-10">Get Started</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </button>
+                </Link>
                 <button className="btn btn-outline btn-lg rounded-full hover:bg-base-200 border-2 hover:border-primary hover:text-primary transition-all duration-300">
                   View Demo
                 </button>
