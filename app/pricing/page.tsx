@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/utils/supabase';
 import { getStripe } from '@/utils/stripe-client';
+import Navigation from '@/app/components/Navigation';
+import AnnouncementBanner from '@/app/components/AnnouncementBanner';
 
 const PRICING_PLANS = [
   {
@@ -109,6 +111,8 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen bg-base-100">
+      <AnnouncementBanner />
+      <Navigation />
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h1>
