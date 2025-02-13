@@ -6,11 +6,21 @@ import { supabase } from '@/utils/supabase';
 
 interface UserProfile {
   email: string;
+  stripe_customer_id?: string;
+}
+
+interface Subscription {
+  id: string;
+  status: string;
+  current_period_end: string;
+  stripe_price_id: string;
 }
 
 export default function Dashboard() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [loading, setLoading] = useState(true);
+  const [managingSubscription, setManagingSubscription] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -22,7 +32,7 @@ export default function Dashboard() {
           throw new Error('Not authenticated');
         }
 
-        // Fetch user profile
+        // Fetch user profile and subscription
         const { data: profileData, error: profileError } = await supabase
           .from('profiles')
           .select('*')
@@ -32,6 +42,11 @@ export default function Dashboard() {
         if (profileError) throw profileError;
         
         setProfile(profileData);
+
+        // Fetch subscription status from API
+        const response = await fetch('/api/stripe/subscription');
+        const { subscription: subscriptionData } = await response.json();
+        setSubscription(subscriptionData);
       } catch (error) {
         router.push('/login');
       } finally {
@@ -47,6 +62,22 @@ export default function Dashboard() {
     router.push('/login');
   };
 
+  const handleManageSubscription = async () => {
+    try {
+      setManagingSubscription(true);
+      const response = await fetch('/api/stripe/portal', {
+        method: 'POST',
+      });
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setManagingSubscription(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-base-100">
@@ -54,7 +85,6 @@ export default function Dashboard() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen bg-base-100">
       <nav className="navbar bg-base-200">
@@ -89,9 +119,56 @@ export default function Dashboard() {
               <h2 className="card-title">Profile Information</h2>
               <div className="space-y-2">
                 <p><span className="font-semibold">Email:</span> {profile?.email}</p>
+                <p>
+                  <span className="font-semibold">Subscription Status:</span>{' '}
+                  <span className={`badge ${subscription?.status === 'active' ? 'badge-success' : 'badge-warning'}`}>
+                    {subscription?.status || 'No active subscription'}
+                  </span>
+                </p>
+                {subscription?.current_period_end && (
+                  <p>
+                    <span className="font-semibold">Next Billing Date:</span>{' '}
+                    {new Date(subscription.current_period_end).toLocaleDateString()}
+                  </p>
+                )}
               </div>
               <div className="mt-4">
                 <button className="btn btn-primary w-full">Update Profile</button>
+              </div>
+            </div>
+          </div>
+
+          {/* Subscription Management */}
+          <div className="card bg-base-200 shadow-xl">
+            <div className="card-body">
+              <h2 className="card-title">Subscription Management</h2>
+              <div className="space-y-4">
+                {subscription?.status === 'active' ? (
+                  <>
+                    <p className="text-success">Your subscription is active</p>
+                    <button
+                      className="btn btn-primary w-full"
+                      onClick={handleManageSubscription}
+                      disabled={managingSubscription}
+                    >
+                      {managingSubscription ? (
+                        <span className="loading loading-spinner" />
+                      ) : (
+                        'Manage Subscription'
+                      )}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-warning">No active subscription</p>
+                    <a
+                      href="/pricing"
+                      className="btn btn-primary w-full"
+                    >
+                      View Plans
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -110,5 +187,4 @@ export default function Dashboard() {
       </main>
     </div>
   );
-} 
-} 
+}

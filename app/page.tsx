@@ -18,7 +18,7 @@ export default function Home() {
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52 backdrop-blur-md">
               <li><a className="font-medium text-base-content">Features</a></li>
-              <li><a className="font-medium text-base-content">Pricing</a></li>
+              <li><Link href="/pricing" className="font-medium text-base-content">Pricing</Link></li>
               <li><a className="font-medium text-base-content">About</a></li>
             </ul>
           </div>
@@ -35,9 +35,12 @@ export default function Home() {
               </a>
             </li>
             <li>
-              <a className="font-medium text-base-content hover:text-primary rounded-full hover:bg-base-200 transition-colors">
+              <Link 
+                href="/pricing"
+                className="font-medium text-base-content hover:text-primary rounded-full hover:bg-base-200 transition-colors"
+              >
                 Pricing
-              </a>
+              </Link>
             </li>
             <li>
               <a className="font-medium text-base-content hover:text-primary rounded-full hover:bg-base-200 transition-colors">
@@ -48,9 +51,12 @@ export default function Home() {
         </div>
         <div className="navbar-end">
           <ThemeSwitcher />
-          <a className="btn btn-primary ml-4 font-medium text-primary-content rounded-full">
+          <Link 
+            href="/pricing"
+            className="btn btn-primary ml-4 font-medium text-primary-content rounded-full"
+          >
             Get Started
-          </a>
+          </Link>
         </div>
       </nav>
 
@@ -116,7 +122,7 @@ export default function Home() {
                 <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
                   <div className="card-body relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                    <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
                     <h2 className="card-title text-primary text-2xl">{feature.title}</h2>
                     <p className="text-base-content/70">{feature.description}</p>
                   </div>
