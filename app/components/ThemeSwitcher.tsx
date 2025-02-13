@@ -7,44 +7,37 @@ export default function ThemeSwitcher() {
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
 
   useEffect(() => {
-    // Get the initial theme from localStorage or system preference
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'system' | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      if (savedTheme !== 'system') {
-        document.documentElement.setAttribute('data-theme', savedTheme);
+    try {
+      // Get initial theme from localStorage
+      const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'system' | null;
+      
+      // If no theme is set, default to system and save it
+      if (!savedTheme) {
+        localStorage.setItem('theme', 'system');
+        setTheme('system');
+        return;
       }
+      
+      setTheme(savedTheme);
+    } catch (e) {
+      console.error('Failed to get initial theme:', e);
+      setTheme('system');
     }
   }, []);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    const handleChange = () => {
-      if (theme === 'system') {
-        document.documentElement.setAttribute(
-          'data-theme',
-          mediaQuery.matches ? 'dark' : 'light'
-        );
-      }
-    };
-
-    handleChange();
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme]);
-
   const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-
-    if (newTheme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-      document.documentElement.setAttribute('data-theme', systemTheme);
-    } else {
-      document.documentElement.setAttribute('data-theme', newTheme);
+    try {
+      setTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Let the layout script handle the theme application
+      const finalTheme = newTheme === 'system'
+        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        : newTheme;
+      
+      document.documentElement.setAttribute('data-theme', finalTheme);
+    } catch (e) {
+      console.error('Failed to change theme:', e);
     }
   };
 
@@ -87,4 +80,4 @@ export default function ThemeSwitcher() {
       </ul>
     </div>
   );
-} 
+}

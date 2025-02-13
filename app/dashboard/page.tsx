@@ -58,7 +58,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-base-100">
       <nav className="navbar bg-base-200">
         <div className="flex-1">
-          <span className="text-xl font-bold">Dashboard</span>
+          <span className="text-xl font-bold text-base-content">Dashboard</span>
         </div>
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">
@@ -77,16 +77,16 @@ export default function Dashboard() {
           {/* Welcome Card */}
           <div className="card bg-base-200 shadow-xl col-span-full">
             <div className="card-body">
-              <h2 className="card-title">Welcome! 👋</h2>
-              <p>This is your dashboard where you can manage your account and access all features.</p>
+              <h2 className="card-title text-base-content">Welcome! 👋</h2>
+              <p className="text-base-content">This is your dashboard where you can manage your account and access all features.</p>
             </div>
           </div>
 
           {/* Profile Info */}
           <div className="card bg-base-200 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title">Profile Information</h2>
-              <div className="space-y-2">
+              <h2 className="card-title text-base-content">Profile Information</h2>
+              <div className="space-y-2 text-base-content">
                 <p><span className="font-semibold">Email:</span> {profile?.email}</p>
                 <p>
                   <span className="font-semibold">Subscription Status:</span>{' '}
@@ -110,11 +110,11 @@ export default function Dashboard() {
           {/* Subscription Management */}
           <div className="card bg-base-200 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title">Subscription Management</h2>
-              <div className="space-y-4">
+              <h2 className="card-title text-base-content">Subscription Management</h2>
+              <div className="space-y-4 text-base-content">
                 {subscription?.status === 'active' ? (
                   <>
-                    <p className="text-success">Your subscription is active</p>
+                    <p className="text-success font-medium">Your subscription is active</p>
                     <button
                       className="btn btn-primary w-full"
                       onClick={handleManageSubscription}
@@ -129,7 +129,7 @@ export default function Dashboard() {
                   </>
                 ) : (
                   <>
-                    <p className="text-warning">No active subscription</p>
+                    <p className="text-warning font-medium">No active subscription</p>
                     <a
                       href="/pricing"
                       className="btn btn-primary w-full"
@@ -145,7 +145,7 @@ export default function Dashboard() {
           {/* Quick Actions */}
           <div className="card bg-base-200 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title">Quick Actions</h2>
+              <h2 className="card-title text-base-content">Quick Actions</h2>
               <div className="space-y-2">
                 <button className="btn btn-outline w-full">View Settings</button>
                 <button className="btn btn-outline w-full">View Documentation</button>

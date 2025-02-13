@@ -115,8 +115,8 @@ export default function Pricing() {
       <Navigation />
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h1>
-          <p className="text-xl text-base-content/70">
+          <h1 className="text-4xl font-bold mb-4 text-base-content">Simple, Transparent Pricing</h1>
+          <p className="text-xl text-base-content opacity-70">
             Choose the plan that best fits your needs
           </p>
         </div>
@@ -136,19 +136,19 @@ export default function Pricing() {
               )}
 
               <div className="card-body">
-                <h2 className="card-title text-2xl justify-center mb-2">
+                <h2 className="card-title text-2xl justify-center mb-2 text-base-content">
                   {plan.name}
                 </h2>
                 <div className="text-center mb-4">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className="text-base-content/70">/{plan.interval}</span>
+                  <span className="text-4xl font-bold text-base-content">{plan.price}</span>
+                  <span className="text-base-content opacity-70">/{plan.interval}</span>
                 </div>
-                <p className="text-center text-base-content/70 mb-6">
+                <p className="text-center text-base-content opacity-70 mb-6">
                   {plan.description}
                 </p>
                 <ul className="space-y-4 mb-6">
                   {plan.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2">
+                    <li key={index} className="flex items-center gap-2 text-base-content">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5 text-primary"
