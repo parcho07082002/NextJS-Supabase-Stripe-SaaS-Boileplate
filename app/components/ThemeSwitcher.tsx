@@ -43,7 +43,7 @@ export default function ThemeSwitcher() {
 
   return (
     <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-base-content hover:bg-base-200">
         {theme === 'dark' ? (
           <Moon className="h-5 w-5" />
         ) : theme === 'light' ? (
@@ -52,10 +52,10 @@ export default function ThemeSwitcher() {
           <Monitor className="h-5 w-5" />
         )}
       </div>
-      <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow-lg bg-base-100 rounded-box w-52">
+      <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow-lg bg-base-200 rounded-box w-52">
         <li>
           <button
-            className={`${theme === 'light' ? 'active' : ''}`}
+            className={`flex items-center gap-2 text-base-content hover:bg-base-300 ${theme === 'light' ? 'active bg-base-300' : ''}`}
             onClick={() => handleThemeChange('light')}
           >
             <Sun className="h-4 w-4" /> Light
@@ -63,7 +63,7 @@ export default function ThemeSwitcher() {
         </li>
         <li>
           <button
-            className={`${theme === 'dark' ? 'active' : ''}`}
+            className={`flex items-center gap-2 text-base-content hover:bg-base-300 ${theme === 'dark' ? 'active bg-base-300' : ''}`}
             onClick={() => handleThemeChange('dark')}
           >
             <Moon className="h-4 w-4" /> Dark
@@ -71,7 +71,7 @@ export default function ThemeSwitcher() {
         </li>
         <li>
           <button
-            className={`${theme === 'system' ? 'active' : ''}`}
+            className={`flex items-center gap-2 text-base-content hover:bg-base-300 ${theme === 'system' ? 'active bg-base-300' : ''}`}
             onClick={() => handleThemeChange('system')}
           >
             <Monitor className="h-4 w-4" /> System
