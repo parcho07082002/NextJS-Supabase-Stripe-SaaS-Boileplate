@@ -11,7 +11,7 @@ interface Subscription {
 }
 
 export default function Dashboard() {
-  const { user, profile, loading, signOut } = useAuth();
+  const { profile, loading, signOut } = useAuth();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [managingSubscription, setManagingSubscription] = useState(false);
 
