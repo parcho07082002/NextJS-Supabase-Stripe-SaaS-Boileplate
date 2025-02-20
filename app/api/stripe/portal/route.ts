@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createCustomerPortalSession } from '@/utils/stripe';
 import { supabase } from '@/utils/supabase';
 
-export async function POST(req: Request) {
+export async function POST() {
   try {
     // Get user session
     const {

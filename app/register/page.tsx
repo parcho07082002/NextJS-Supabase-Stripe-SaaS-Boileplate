@@ -5,7 +5,6 @@ import { supabase } from '@/utils/supabase';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
-import Image from 'next/image';
 
 // Define validation schema
 const registerSchema = z.object({
@@ -125,7 +124,7 @@ export default function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-100">
       <div className="max-w-md w-full px-6 py-8 bg-base-200 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center mb-8">Create Account</h2>
+        <h2 className="text-3xl font-bold text-center mb-8 text-base-content">Create Account</h2>
         
         {error && (
           <div className="alert alert-error mb-4">
@@ -218,7 +217,7 @@ export default function Register() {
           </button>
         </form>
 
-        <div className="divider">OR</div>
+        <div className="divider text-base-content/70">OR</div>
 
         <button
           onClick={async () => {
@@ -263,7 +262,7 @@ export default function Register() {
         </button>
 
         <div className="mt-6 text-center">
-          <p className="text-sm">
+          <p className="text-sm text-base-content/70">
             Already have an account?{' '}
             <Link href="/login" className="link link-primary">
               Sign in
