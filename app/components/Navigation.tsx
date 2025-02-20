@@ -1,15 +1,22 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Navigation() {
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const isHome = pathname === "/";
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleAboutClick = (e: React.MouseEvent) => {
+    if (!mounted) return;
     e.preventDefault();
     if (!isHome) {
       router.push("/#features");
@@ -23,6 +30,7 @@ export default function Navigation() {
   };
 
   const handleFeaturesClick = (e: React.MouseEvent) => {
+    if (!mounted) return;
     e.preventDefault();
     if (!isHome) {
       router.push("/#features");
@@ -34,6 +42,26 @@ export default function Navigation() {
       featuresSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  if (!mounted) {
+    return (
+      <nav className="navbar bg-base-100/80 backdrop-blur-md border-b border-base-200 sticky top-0 z-50">
+        <div className="navbar-start">
+          <div className="btn btn-ghost text-xl font-bold text-primary">
+            SaaSBP
+          </div>
+        </div>
+        <div className="navbar-end">
+          <div className="btn btn-ghost btn-circle">
+            <span className="loading loading-spinner loading-sm"></span>
+          </div>
+          <div className="btn btn-primary ml-4 font-medium text-primary-content rounded-full">
+            Get Started
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="navbar bg-base-100/80 backdrop-blur-md border-b border-base-200 sticky top-0 z-50">

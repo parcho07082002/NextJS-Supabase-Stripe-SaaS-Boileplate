@@ -26,24 +26,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const theme = localStorage.getItem('theme') || 'light';
-                document.documentElement.setAttribute('data-theme', theme);
-              } catch (e) {
-                console.error('Failed to set initial theme:', e);
-              }
-            `,
-          }}
-        />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  let theme = localStorage.getItem('theme')
+                  if (!theme) {
+                    theme = 'light'
+                    localStorage.setItem('theme', theme)
+                  }
+                  document.documentElement.setAttribute('data-theme', theme)
+                } catch (e) {}
+              })()
+            `,
+          }}
+        />
         <ThemeProvider>
           <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
