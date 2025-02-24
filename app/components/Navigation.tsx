@@ -45,10 +45,10 @@ export default function Navigation() {
 
   if (!mounted) {
     return (
-      <nav className="navbar bg-base-100/80 backdrop-blur-md border-b border-base-200 sticky top-0 z-50">
+      <nav className="navbar bg-base-100 border-b border-base-200 sticky top-0 z-50">
         <div className="navbar-start">
-          <div className="btn btn-ghost text-xl font-bold text-primary">
-            SaaSBP
+          <div className="text-xl font-bold text-base-content">
+            Joblio
           </div>
         </div>
         <div className="navbar-end">
@@ -64,7 +64,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="navbar bg-base-100/80 backdrop-blur-md border-b border-base-200 sticky top-0 z-50">
+    <nav className="navbar bg-base-100 border-b border-base-200 sticky top-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -72,15 +72,14 @@ export default function Navigation() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
             </svg>
           </div>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52 backdrop-blur-md">
-            <li><a onClick={handleFeaturesClick} className="font-medium text-base-content">Features</a></li>
-            <li><Link href="/pricing" className="font-medium text-base-content">Pricing</Link></li>
-            <li><a onClick={handleAboutClick} className="font-medium text-base-content">About</a></li>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52">
+            <li><a onClick={handleFeaturesClick} className="font-medium text-base-content hover:text-primary transition-colors">Features</a></li>
+            <li><Link href="/pricing" className="font-medium text-base-content hover:text-primary transition-colors">Pricing</Link></li>
+            <li><a onClick={handleAboutClick} className="font-medium text-base-content hover:text-primary transition-colors">About</a></li>
           </ul>
         </div>
-        <Link href="/" className="btn btn-ghost text-xl font-bold text-primary hover:text-primary group">
-          SaaSBP
-          <div className="h-1 w-0 group-hover:w-full transition-all duration-300 bg-primary absolute bottom-0" />
+        <Link href="/" className="px-4 py-2 text-xl font-bold text-base-content hover:text-base-content/80 cursor-pointer transition-colors">
+          Joblio
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -88,7 +87,7 @@ export default function Navigation() {
           <li>
             <a 
               onClick={handleFeaturesClick}
-              className="font-medium text-base-content hover:text-primary rounded-full hover:bg-base-200 transition-colors cursor-pointer"
+              className="font-medium text-base-content hover:text-primary transition-colors cursor-pointer"
             >
               Features
             </a>
@@ -96,7 +95,7 @@ export default function Navigation() {
           <li>
             <Link 
               href="/pricing"
-              className="font-medium text-base-content hover:text-primary rounded-full hover:bg-base-200 transition-colors"
+              className="font-medium text-base-content hover:text-primary transition-colors"
             >
               Pricing
             </Link>
@@ -104,7 +103,7 @@ export default function Navigation() {
           <li>
             <a 
               onClick={handleAboutClick}
-              className="font-medium text-base-content hover:text-primary rounded-full hover:bg-base-200 transition-colors cursor-pointer"
+              className="font-medium text-base-content hover:text-primary transition-colors cursor-pointer"
             >
               About
             </a>
